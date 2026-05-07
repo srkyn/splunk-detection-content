@@ -6,7 +6,7 @@ Each query includes:
 - **What it detects** — the behavior or indicator being hunted
 - **ATT&CK mapping** — tactic and technique reference
 - **Required data sources** — index/sourcetype assumptions
-- **SPL** — copy-paste ready, with comments
+- **SPL** — copy-paste ready, with field assumptions called out
 - **Tuning notes** — known FP sources and how to reduce noise
 
 ---
@@ -31,7 +31,7 @@ Each query includes:
 | [credential-access.md](queries/credential-access.md) | Credential Access | T1110.001, T1558.003, T1003.001 |
 | [lateral-movement.md](queries/lateral-movement.md) | Lateral Movement | T1021.002, T1021.006, T1550.002 |
 | [defense-evasion.md](queries/defense-evasion.md) | Defense Evasion | T1070.001, T1562.001, T1036.005 |
-| [discovery.md](queries/discovery.md) | Discovery | T1018, T1087.002, T1046 |
+| [discovery.md](queries/discovery.md) | Discovery | T1135, T1087.002, T1046 |
 
 ---
 
