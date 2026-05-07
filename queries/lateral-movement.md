@@ -18,6 +18,8 @@ index=wineventlog sourcetype="WinEventLog:Security" EventCode=5140 Share_Name IN
 
 **Tuning notes:** Admin tools, software deployment, and backup agents may be noisy. Focus on unusual users, new source hosts, or spikes outside maintenance windows.
 
+**Analyst next steps:** Compare the source host to known admin jump boxes, review destination hosts, and pivot to 4624 logon type 3/10 plus service creation or remote execution events.
+
 ## Remote PowerShell Session
 
 **What it detects:** PowerShell remoting activity.
@@ -36,6 +38,8 @@ index=wineventlog sourcetype="WinEventLog:Microsoft-Windows-PowerShell/Operation
 
 **Tuning notes:** Approved admin automation may use WinRM heavily. Baseline known admin jump boxes and look for non-admin endpoints initiating sessions.
 
+**Analyst next steps:** Identify the initiating account and source host, check whether the account recently authenticated from a new location, and review commands run in the session.
+
 ## Explicit Credential Logon
 
 **What it detects:** Logon events where explicit credentials were used.
@@ -53,3 +57,5 @@ index=wineventlog sourcetype="WinEventLog:Security" EventCode=4648
 ```
 
 **Tuning notes:** This is not proof of pass-the-hash by itself. Use it as a pivot with logon type, source host, destination host, and unusual account use.
+
+**Analyst next steps:** Correlate with 4624 events, target servers, process names, and whether explicit credentials were used by an account that does not normally administer that host.

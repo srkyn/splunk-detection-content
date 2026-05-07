@@ -17,6 +17,8 @@ index=wineventlog (EventCode=1102 OR EventCode=104)
 
 **Tuning notes:** Log clearing should be rare. Validate whether the action came from an approved admin process or incident-response activity.
 
+**Analyst next steps:** Identify the user and host, check nearby logon/process activity, and review whether other evidence sources still show what happened before the clear event.
+
 ## Security Tool Service Stopped
 
 **What it detects:** Stopped services with names commonly associated with security tooling.
@@ -34,6 +36,8 @@ index=wineventlog sourcetype="WinEventLog:System" EventCode=7036
 ```
 
 **Tuning notes:** Tune product names to the environment. Correlate with service-control events, change tickets, and process creation.
+
+**Analyst next steps:** Confirm whether the stop was planned, identify the caller process/user, and check whether suspicious activity started immediately before or after the service stopped.
 
 ## Suspicious Process Masquerading
 
@@ -53,3 +57,5 @@ index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" Ev
 ```
 
 **Tuning notes:** Confirm the real path and signature. Many false positives come from test labs or copied binaries; production hits deserve fast review.
+
+**Analyst next steps:** Compare path, hash, signer, parent process, and command line to the legitimate Windows binary. Search the host for sibling files in the same suspicious path.

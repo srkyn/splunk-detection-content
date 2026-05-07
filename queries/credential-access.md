@@ -19,6 +19,8 @@ index=wineventlog sourcetype="WinEventLog:Security" EventCode=4625
 
 **Tuning notes:** Watch for service accounts, scanners, lockout storms, and VPN gateways. Pair with successful logons after the failure burst.
 
+**Analyst next steps:** Check whether the same source later succeeded, whether the account locked out, and whether the source is a VPN, scanner, jump box, or unknown endpoint.
+
 ## Kerberoasting Indicators
 
 **What it detects:** Kerberos service ticket requests that use RC4 encryption.
@@ -37,6 +39,8 @@ index=wineventlog sourcetype="WinEventLog:Security" EventCode=4769 Ticket_Encryp
 
 **Tuning notes:** Some legacy services still use RC4. Prioritize service accounts with SPNs, old passwords, and requests from unusual hosts.
 
+**Analyst next steps:** Identify the service account, password age, SPN, requesting host, and whether the same host performed domain discovery or lateral movement beforehand.
+
 ## LSASS Access From Unusual Process
 
 **What it detects:** Processes opening LSASS with access rights commonly associated with credential dumping.
@@ -54,3 +58,5 @@ index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" Ev
 ```
 
 **Tuning notes:** Security tools and EDR products may inspect LSASS legitimately. Baseline approved tools and escalate unknown binaries, admin utilities, and user-writable paths.
+
+**Analyst next steps:** Confirm the source image, signer, command line, parent process, and whether a dump file or outbound connection followed the access event.

@@ -18,6 +18,8 @@ index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" Ev
 
 **Tuning notes:** Admin scripts and helpdesk troubleshooting may trigger this. Prioritize discovery from non-admin users, new hosts, or post-compromise sequences.
 
+**Analyst next steps:** Check whether the same user ran account discovery, port scans, or attempted SMB access after enumeration.
+
 ## Domain Account Enumeration
 
 **What it detects:** Commands used to enumerate domain users or groups.
@@ -36,6 +38,8 @@ index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" Ev
 
 **Tuning notes:** Identity admins and inventory jobs may be expected. Look for discovery from workstations, unusual service accounts, or immediately after phishing alerts.
 
+**Analyst next steps:** Review account role, source host, recent logons, and whether discovery was followed by credential access or lateral movement events.
+
 ## Port Scanning Behavior
 
 **What it detects:** Potential internal scanning tools or PowerShell-based port checks.
@@ -53,3 +57,5 @@ index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" Ev
 ```
 
 **Tuning notes:** Approved vulnerability scanning should come from known scanner hosts. Escalate scanning from user endpoints, servers that do not normally scan, or commands launched by Office/script interpreters.
+
+**Analyst next steps:** Identify target range, source user, parent process, and whether connection attempts were followed by authentication attempts or admin share access.

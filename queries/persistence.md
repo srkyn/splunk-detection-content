@@ -17,6 +17,8 @@ index=wineventlog sourcetype="WinEventLog:Security" EventCode IN (4698, 4702)
 
 **Tuning notes:** Baseline known software updaters, endpoint management tooling, and administrative maintenance windows. Prioritize new tasks created by non-admin users, unusual paths, or unsigned binaries.
 
+**Analyst next steps:** Review the task action, author, run context, creation time, and binary path. Pivot to process creation, file creation, and recent logons on the same host.
+
 ## Run Key Persistence
 
 **What it detects:** Sysmon registry modifications to common Run and RunOnce keys.
@@ -35,6 +37,8 @@ TargetObject IN ("*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\*", "*\\
 
 **Tuning notes:** Browser updaters, Teams, OneDrive, and device agents commonly write here. Investigate unsigned binaries, user-writable paths, temp directories, and newly observed values.
 
+**Analyst next steps:** Check whether the referenced binary exists, where it was written from, whether it is signed, and whether the same user recently opened email attachments or downloads.
+
 ## New Service Installed
 
 **What it detects:** Windows service creation events.
@@ -51,3 +55,5 @@ index=wineventlog sourcetype="WinEventLog:System" EventCode=7045
 ```
 
 **Tuning notes:** Filter approved deployment tools and known enterprise agents. Escalate services running from user profiles, downloads, temp paths, or unusual network shares.
+
+**Analyst next steps:** Review service account, service path, parent process, file hash, signer, and whether the service started immediately after creation.
