@@ -74,7 +74,7 @@ Use the broad version first to understand normal activity, then tighten the quer
 
 This is a defensive content repository. The searches are meant to show security operations thinking: what signal matters, what context is needed, and what I would do next during triage.
 
-I intentionally avoid environment-specific allowlists, real hostnames, internal domains, usernames, ticket numbers, and screenshots from private systems.
+I avoid environment-specific allowlists, real hostnames, internal domains, usernames, ticket numbers, and screenshots from private systems.
 
 ---
 
