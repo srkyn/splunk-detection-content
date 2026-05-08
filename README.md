@@ -1,5 +1,7 @@
 # splunk-detection-content
 
+![Splunk Detection Content project banner](docs/assets/splunk-detection-content.svg)
+
 A working collection of Splunk SPL detections organized by [MITRE ATT&CK](https://attack.mitre.org/) tactic. The content is written for Windows-centric environments with Active Directory, Sysmon, PowerShell logging, and standard Windows Security events.
 
 The point of this repository is not to dump searches. Each detection is written as an analyst note: what behavior it looks for, what data it assumes, what tends to be noisy, and what I would check next before escalating.
@@ -75,6 +77,14 @@ Use the broad version first to understand normal activity, then tighten the quer
 This is a defensive content repository. The searches are meant to show security operations thinking: what signal matters, what context is needed, and what I would do next during triage.
 
 I avoid environment-specific allowlists, real hostnames, internal domains, usernames, ticket numbers, and screenshots from private systems.
+
+## Validation
+
+The repository includes a lightweight validation script that checks each query writeup for the expected analyst sections, a MITRE ATT&CK technique ID, and a fenced SPL block:
+
+```bash
+python scripts/validate_queries.py
+```
 
 ---
 
