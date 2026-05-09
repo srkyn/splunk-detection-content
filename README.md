@@ -21,7 +21,7 @@ Each query includes:
 1. Start with behavior, not a tool name.
 2. Confirm the data source can actually see that behavior.
 3. Write the first SPL version as a visibility search.
-4. Add grouping, thresholds, and fields that help a human decide.
+4. Add grouping, thresholds, and fields that help a person decide.
 5. Tune known-good admin activity without hiding rare activity.
 6. Document what to check next so the alert does not stop at "interesting."
 
