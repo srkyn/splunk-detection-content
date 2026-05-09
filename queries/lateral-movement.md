@@ -58,4 +58,4 @@ index=wineventlog sourcetype="WinEventLog:Security" EventCode=4648
 
 **Tuning notes:** This is not proof of pass-the-hash by itself. Use it as a pivot with logon type, source host, destination host, and unusual account use.
 
-**Analyst next steps:** Correlate with 4624 events, target servers, process names, and whether explicit credentials were used by an account that does not normally administer that host.
+**Analyst next steps:** Correlate with 4624 logon type, NTLM/Kerberos context, target servers, process names, and whether explicit credentials were used by an account that does not normally administer that host.

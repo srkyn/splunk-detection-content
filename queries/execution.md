@@ -10,7 +10,7 @@
 
 ```spl
 index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
-Image="*\\powershell.exe" OR Image="*\\pwsh.exe"
+((Image="*\\powershell.exe") OR (Image="*\\pwsh.exe"))
 | eval cmd_lc=lower(CommandLine)
 | where like(cmd_lc, "%-enc%") OR like(cmd_lc, "%-encodedcommand%") OR like(cmd_lc, "%frombase64string%")
 | eval technique="T1059.001 PowerShell"
@@ -32,7 +32,7 @@ Image="*\\powershell.exe" OR Image="*\\pwsh.exe"
 
 ```spl
 index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
-Image IN ("*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\wscript.exe", "*\\cscript.exe", "*\\mshta.exe")
+((Image="*\\powershell.exe") OR (Image="*\\pwsh.exe") OR (Image="*\\cmd.exe") OR (Image="*\\wscript.exe") OR (Image="*\\cscript.exe") OR (Image="*\\mshta.exe"))
 | eval parent_lc=lower(ParentImage)
 | where match(parent_lc, "\\\\(winword|excel|powerpnt|outlook|chrome|msedge|firefox|7zfm|winrar)\\.exe$")
 | eval technique="T1204 User Execution"
@@ -48,20 +48,20 @@ Image IN ("*\\powershell.exe", "*\\pwsh.exe", "*\\cmd.exe", "*\\wscript.exe", "*
 
 **What it detects:** Native Windows binaries commonly abused to download or execute content.
 
-**ATT&CK mapping:** T1059.003 - Command and Scripting Interpreter: Windows Command Shell
+**ATT&CK mapping:** T1105 - Ingress Tool Transfer; T1218 - System Binary Proxy Execution
 
 **Required data sources:** Sysmon Event ID 1.
 
 ```spl
 index=sysmon sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
-Image IN ("*\\certutil.exe", "*\\bitsadmin.exe", "*\\mshta.exe", "*\\rundll32.exe", "*\\regsvr32.exe")
+((Image="*\\certutil.exe") OR (Image="*\\bitsadmin.exe") OR (Image="*\\mshta.exe") OR (Image="*\\rundll32.exe") OR (Image="*\\regsvr32.exe"))
 | eval cmd_lc=lower(CommandLine)
 | where like(cmd_lc, "%http://%") OR like(cmd_lc, "%https://%") OR like(cmd_lc, "%urlcache%") OR like(cmd_lc, "%scrobj.dll%")
-| eval technique="T1059.003 Command Shell"
+| eval technique="T1105/T1218 LOLBin transfer or proxy execution"
 | table _time host user ParentImage Image CommandLine technique
 | sort - _time
 ```
 
-**Tuning notes:** These binaries can be used by administrators, but internet URLs and user-writable paths raise priority.
+**Tuning notes:** These binaries can be used by administrators, installers, and support tooling. Internet URLs, scriptlet indicators, unusual parent processes, and user-writable paths raise priority.
 
 **Analyst next steps:** Extract URLs, check reputation, review DNS/proxy logs, and look for dropped files or subsequent process execution on the same host.

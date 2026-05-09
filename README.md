@@ -1,10 +1,12 @@
-# splunk-detection-content
+# Splunk Detection Content
 
 ![Splunk Detection Content project banner](docs/assets/splunk-detection-content.svg)
 
-A working collection of Splunk SPL detections organized by [MITRE ATT&CK](https://attack.mitre.org/) tactic. The content is written for Windows-centric environments with Active Directory, Sysmon, PowerShell logging, and standard Windows Security events.
+A detection notebook for Splunk SPL searches organized by [MITRE ATT&CK](https://attack.mitre.org/) tactic. The content is written for Windows-centric lab environments with Active Directory, Sysmon, PowerShell logging, and standard Windows Security events.
 
-The point of this repository is not to dump searches. Each detection is written as an analyst note: what behavior it looks for, what data it assumes, what tends to be noisy, and what I would check next before escalating.
+The point of this repository is not to dump searches or claim production coverage. Each detection is written as an analyst note: what behavior it looks for, what data it assumes, what tends to be noisy, and what I would check next before escalating.
+
+The searches are based on lab practice, public technique research, and sanitized detection-writing exercises. They are meant to show security operations thinking: behavior, assumptions, tuning, and triage context.
 
 Each query includes:
 - **What it detects** — the behavior or indicator being hunted
@@ -16,7 +18,21 @@ Each query includes:
 
 ---
 
-## How I Review A Detection
+## Scope
+
+This is a portfolio detection notebook, not a managed detection product.
+
+Use it to review:
+
+- how I translate attacker behavior into SPL
+- what data sources each search assumes
+- where false positives are likely
+- what I would check before escalation
+- how lab and TryHackMe-style practice can become documented detection logic
+
+Do not use it as-is in a live Splunk environment without adapting indexes, sourcetypes, field names, baselines, and allowlists.
+
+## How I Review a Detection
 
 1. Start with behavior, not a tool name.
 2. Confirm the data source can actually see that behavior.
@@ -48,7 +64,7 @@ That last part matters. A detection that does not tell the next analyst where to
 | [lateral-movement.md](queries/lateral-movement.md) | Lateral Movement | T1021.002, T1021.006, T1550.002 |
 | [defense-evasion.md](queries/defense-evasion.md) | Defense Evasion | T1070.001, T1562.001, T1036.005 |
 | [discovery.md](queries/discovery.md) | Discovery | T1135, T1087.002, T1046 |
-| [execution.md](queries/execution.md) | Execution | T1059.001, T1059.003, T1204 |
+| [execution.md](queries/execution.md) | Execution | T1059.001, T1204, T1105, T1218 |
 | [initial-access.md](queries/initial-access.md) | Initial Access | T1566.001, T1566.002 |
 | [exfiltration.md](queries/exfiltration.md) | Exfiltration | T1041, T1567.002 |
 
@@ -74,9 +90,11 @@ Use the broad version first to understand normal activity, then tighten the quer
 
 ## Portfolio Notes
 
-This is a defensive content repository. The searches are meant to show security operations thinking: what signal matters, what context is needed, and what I would do next during triage.
+This is a defensive content repository. The searches are meant to show what signal matters, what context is needed, and what I would do next during triage.
 
 I avoid environment-specific allowlists, real hostnames, internal domains, usernames, ticket numbers, and screenshots from private systems.
+
+For lab provenance and ongoing practice notes, see [Practice Log](docs/practice-log.md).
 
 ## Validation
 
@@ -90,5 +108,5 @@ python scripts/validate_queries.py
 
 ## Author
 
-David Sarkisyan · Cybersecurity Analyst · Brooklyn, NY
-[github.com/srkyn](https://github.com/srkyn) · Splunk Core Certified User
+David Sarkisyan · Cybersecurity Analyst · New York City
+[srkyn.com](https://srkyn.com) · [github.com/srkyn](https://github.com/srkyn) · Splunk Core User
