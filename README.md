@@ -20,7 +20,7 @@ Each query includes:
 
 ## Scope
 
-This is a portfolio detection notebook, not a managed detection product.
+This is a detection notebook, not a managed detection product.
 
 Use it to review:
 
@@ -88,7 +88,7 @@ Use the broad version first to understand normal activity, then tighten the quer
 
 ---
 
-## Portfolio Notes
+## Notes
 
 This is a defensive content repository. The searches are meant to show what signal matters, what context is needed, and what I would do next during triage.
 

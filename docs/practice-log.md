@@ -10,7 +10,7 @@ Use this format when adding TryHackMe, lab, or course work:
 
 | Date | Source | Room / Lab | Topic | Detection idea | Notes added |
 |---|---|---|---|---|---|
-| YYYY-MM-DD | TryHackMe | [room name] | [tactic or technique] | [what behavior could be searched] | [query file or TODO] |
+| 2026-05 | TryHackMe / local lab review | Windows and AD practice | Detection fundamentals | Translate observed behavior into SPL assumptions, tuning notes, and analyst pivots | Current query set |
 
 ## Current Practice Sources
 
@@ -31,8 +31,4 @@ Use this format when adding TryHackMe, lab, or course work:
 
 ## Backlog
 
-Add completed TryHackMe rooms here as they are reviewed:
-
-| Source | Room / Lab | Detection note to create or improve |
-|---|---|---|
-| TryHackMe | [add completed room] | [query file / technique] |
+Add specific rooms or labs here only after they are reviewed and converted into a concrete detection note.
