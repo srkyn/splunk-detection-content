@@ -2,11 +2,11 @@
 
 ![Splunk Detection Content project banner](docs/assets/splunk-detection-content.svg)
 
-A detection notebook for Splunk SPL searches organized by [MITRE ATT&CK](https://attack.mitre.org/) tactic. The content is written for Windows-centric lab environments with Active Directory, Sysmon, PowerShell logging, and standard Windows Security events.
+A detection and triage notebook for Splunk SPL searches organized by [MITRE ATT&CK](https://attack.mitre.org/) tactic. The content is written for Windows-centric lab environments with Active Directory, Sysmon, PowerShell logging, and standard Windows Security events.
 
 The point of this repository is not to dump searches or claim production coverage. Each detection is written as an analyst note: what behavior it looks for, what data it assumes, what tends to be noisy, and what I would check next before escalating.
 
-The searches are based on lab practice, public technique research, and sanitized detection-writing exercises. They are meant to show security operations thinking: behavior, assumptions, tuning, and triage context.
+The searches are based on lab practice, public technique research, and sanitized detection-writing exercises. They are meant to show security operations thinking: behavior, assumptions, tuning, triage context, and short playbook-style review paths.
 
 Each query includes:
 - **What it detects** — the behavior or indicator being hunted
@@ -15,6 +15,12 @@ Each query includes:
 - **SPL** — copy-paste ready, with field assumptions called out
 - **Tuning notes** — known FP sources and how to reduce noise
 - **Analyst next steps** — pivots I would use before calling something suspicious
+
+Each playbook includes:
+- **Scope** — the behavior and related query notes covered
+- **Triage flow** — the order I would check context
+- **Key pivots** — fields, logs, and related activity worth reviewing
+- **Escalation and closure criteria** — when to keep digging and when the event likely fits known-good behavior
 
 ---
 
@@ -28,6 +34,7 @@ Use it to review:
 - what data sources each search assumes
 - where false positives are likely
 - what I would check before escalation
+- how short playbooks turn a query hit into a review path
 - how lab and TryHackMe-style practice can become documented detection logic
 
 Do not use it as-is in a live Splunk environment without adapting indexes, sourcetypes, field names, baselines, and allowlists.
@@ -70,6 +77,18 @@ That last part matters. A detection that does not tell the next analyst where to
 
 ---
 
+## Playbook Index
+
+| File | Related detections | Focus |
+|---|---|---|
+| [persistence-triage.md](playbooks/persistence-triage.md) | `queries/persistence.md` | Scheduled tasks, Run keys, new services |
+| [credential-access-triage.md](playbooks/credential-access-triage.md) | `queries/credential-access.md` | Brute force, Kerberoasting, LSASS access |
+| [execution-triage.md](playbooks/execution-triage.md) | `queries/execution.md`, `queries/initial-access.md` | PowerShell, script parents, LOLBins, document/browser starts |
+| [lateral-movement-triage.md](playbooks/lateral-movement-triage.md) | `queries/lateral-movement.md` | SMB admin shares, remote PowerShell, explicit credentials |
+| [exfiltration-triage.md](playbooks/exfiltration-triage.md) | `queries/exfiltration.md` | Archive staging, external transfer, cloud upload tools |
+
+---
+
 ## Usage
 
 All queries target a `index=wineventlog` or `index=sysmon` baseline. Adjust index names and field mappings to match your environment before deploying.
@@ -90,7 +109,7 @@ Use the broad version first to understand normal activity, then tighten the quer
 
 ## Notes
 
-This is a defensive content repository. The searches are meant to show what signal matters, what context is needed, and what I would do next during triage.
+This is a defensive content repository. The searches and playbooks are meant to show what signal matters, what context is needed, and what I would do next during triage.
 
 I avoid environment-specific allowlists, real hostnames, internal domains, usernames, ticket numbers, and screenshots from private systems.
 
@@ -98,7 +117,7 @@ For lab provenance and ongoing practice notes, see [Practice Log](docs/practice-
 
 ## Validation
 
-The repository includes a lightweight validation script that checks each query writeup for the expected analyst sections, a MITRE ATT&CK technique ID, and a fenced SPL block:
+The repository includes a lightweight validation script that checks each query writeup for the expected analyst sections, a MITRE ATT&CK technique ID, and a fenced SPL block. It also checks each playbook for the core triage sections:
 
 ```bash
 python scripts/validate_queries.py

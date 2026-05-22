@@ -2,7 +2,7 @@
 
 This file tracks lab and training work that informs the detection notes in this repository.
 
-The goal is not to list every exercise completed. The goal is to show how practice turns into analyst-ready notes: behavior observed, telemetry needed, likely noise, and next-step pivots.
+The goal is not to list every exercise completed. The goal is to show how practice turns into analyst-ready notes: behavior observed, telemetry needed, likely noise, next-step pivots, and short triage playbooks.
 
 ## How to Log Practice
 
@@ -10,7 +10,7 @@ Use this format when adding TryHackMe, lab, or course work:
 
 | Date | Source | Room / Lab | Topic | Detection idea | Notes added |
 |---|---|---|---|---|---|
-| 2026-05 | TryHackMe / local lab review | Windows and AD practice | Detection fundamentals | Translate observed behavior into SPL assumptions, tuning notes, and analyst pivots | Current query set |
+| 2026-05 | TryHackMe / local lab review | Windows and AD practice | Detection fundamentals | Translate observed behavior into SPL assumptions, tuning notes, analyst pivots, and triage playbooks | Current query and playbook set |
 
 ## Current Practice Sources
 
@@ -25,7 +25,7 @@ Use this format when adding TryHackMe, lab, or course work:
 
 - Do not copy private lab flags, answers, screenshots, or platform-only content.
 - Do not claim a query is production-ready because it worked in a lab.
-- Convert practice into observable behavior, data-source assumptions, tuning notes, and triage pivots.
+- Convert practice into observable behavior, data-source assumptions, tuning notes, triage pivots, and playbook-style review paths.
 - Keep room names, dates, and lessons honest. If a room was not completed, do not list it as completed.
 - Keep sensitive details out of public notes.
 
