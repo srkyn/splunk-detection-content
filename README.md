@@ -104,9 +104,15 @@ The repository includes a lightweight validation script that checks each query w
 python scripts/validate_queries.py
 ```
 
+## License And Safety
+
+Detection notes and sample SPL are available under the [MIT License](LICENSE).
+
+Before using any search operationally, tune index names, sourcetypes, field names, thresholds, and expected false positives for the environment. For safe reporting guidance, see [SECURITY.md](SECURITY.md).
+
 ---
 
 ## Author
 
-David Sarkisyan · Cybersecurity Analyst · New York City
+David Sarkisyan · Cybersecurity Analyst · New York City · Built in Brooklyn
 [srkyn.com](https://srkyn.com) · [github.com/srkyn](https://github.com/srkyn) · Splunk Core User
