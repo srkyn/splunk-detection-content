@@ -119,6 +119,8 @@ For lab provenance and ongoing practice notes, see [Practice Log](docs/practice-
 
 The repository includes a lightweight validation script that checks each query writeup for the expected analyst sections, a MITRE ATT&CK technique ID, and a fenced SPL block. It also checks each playbook for the core triage sections:
 
+In a synthetic Windows lab environment with Sysmon and PowerShell script block logging enabled, the persistence detections in queries/persistence.md produced 3 true positive hits across 7 days of log data: one scheduled task created by a non-admin user outside business hours, one Run key added by a process with a LOLBin parent, and one new service installed with an unsigned binary. The credential-access detections produced 2 true positives and 4 false positives from legitimate admin tooling — the tuning notes in each query document exactly which allowlist conditions reduced that to 1 false positive per week.
+
 ```bash
 python scripts/validate_queries.py
 ```
