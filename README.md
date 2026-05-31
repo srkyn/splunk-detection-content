@@ -77,6 +77,15 @@ That last part matters. A detection that does not tell the next analyst where to
 
 ---
 
+## Sigma Rules
+
+Sigma format versions of the detections above are in [`sigma/`](sigma/).
+Convert to any supported SIEM backend using [sigma-cli](https://github.com/SigmaHQ/sigma-cli):
+
+```bash
+sigma convert -t splunk -p sysmon sigma/proc_creation_win_powershell_susp_encoded_long.yml
+```
+
 ## Playbook Index
 
 | File | Related detections | Focus |
