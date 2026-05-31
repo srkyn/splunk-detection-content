@@ -9,18 +9,18 @@ The point is not to dump searches or pretend they are production-ready out of th
 The searches are based on lab practice, public technique research, and sanitized detection-writing exercises. They are meant to show security operations thinking: behavior, assumptions, tuning, triage context, and short playbook-style review paths.
 
 Each query includes:
-- **What it detects** — the behavior or indicator being hunted
-- **ATT&CK mapping** — tactic and technique reference
-- **Required data sources** — index/sourcetype assumptions
-- **SPL** — copy-paste ready, with field assumptions called out
-- **Tuning notes** — known FP sources and how to reduce noise
-- **Analyst next steps** — pivots I would use before calling something suspicious
+- **What it detects** - the behavior or indicator being hunted
+- **ATT&CK mapping** - tactic and technique reference
+- **Required data sources** - index/sourcetype assumptions
+- **SPL** - copy-paste ready, with field assumptions called out
+- **Tuning notes** - known FP sources and how to reduce noise
+- **Analyst next steps** - pivots I would use before calling something suspicious
 
 Each playbook includes:
-- **Scope** — the behavior and related query notes covered
-- **Triage flow** — the order I would check context
-- **Key pivots** — fields, logs, and related activity worth reviewing
-- **Escalation and closure criteria** — when to keep digging and when the event likely fits known-good behavior
+- **Scope** - the behavior and related query notes covered
+- **Triage flow** - the order I would check context
+- **Key pivots** - fields, logs, and related activity worth reviewing
+- **Escalation and closure criteria** - when to keep digging and when the event likely fits known-good behavior
 
 ---
 
@@ -75,17 +75,6 @@ That last part matters. A detection that does not tell the next analyst where to
 | [initial-access.md](queries/initial-access.md) | Initial Access | T1566.001, T1566.002 |
 | [exfiltration.md](queries/exfiltration.md) | Exfiltration | T1041, T1567.002 |
 
----
-
-## Sigma Rules
-
-Sigma format versions of the detections above are in [`sigma/`](sigma/).
-Convert to any supported SIEM backend using [sigma-cli](https://github.com/SigmaHQ/sigma-cli):
-
-```bash
-sigma convert -t splunk -p sysmon sigma/proc_creation_win_powershell_susp_encoded_long.yml
-```
-
 ## Playbook Index
 
 | File | Related detections | Focus |
@@ -95,6 +84,22 @@ sigma convert -t splunk -p sysmon sigma/proc_creation_win_powershell_susp_encode
 | [execution-triage.md](playbooks/execution-triage.md) | `queries/execution.md`, `queries/initial-access.md` | PowerShell, script parents, LOLBins, document/browser starts |
 | [lateral-movement-triage.md](playbooks/lateral-movement-triage.md) | `queries/lateral-movement.md` | SMB admin shares, remote PowerShell, explicit credentials |
 | [exfiltration-triage.md](playbooks/exfiltration-triage.md) | `queries/exfiltration.md` | Archive staging, external transfer, cloud upload tools |
+
+## Sigma Rules
+
+Sigma format versions of the detections above are in [`sigma/`](sigma/).
+These rules are identical to the rules submitted to SigmaHQ in
+[PR #6036](https://github.com/SigmaHQ/sigma/pull/6036).
+
+Convert to any supported SIEM backend using [sigma-cli](https://github.com/SigmaHQ/sigma-cli):
+
+```bash
+sigma convert -t splunk -p sysmon sigma/proc_creation_win_powershell_susp_encoded_long.yml
+```
+
+8 rules covering T1053.005, T1547.001, T1003.001, T1558.003, T1021.002,
+T1059.001, T1685.005, and T1105. Upstream PR open at
+https://github.com/SigmaHQ/sigma/pull/6036.
 
 ---
 
@@ -128,7 +133,7 @@ For lab provenance and ongoing practice notes, see [Practice Log](docs/practice-
 
 The repository includes a lightweight validation script that checks each query writeup for the expected analyst sections, a MITRE ATT&CK technique ID, and a fenced SPL block. It also checks each playbook for the core triage sections:
 
-In a synthetic Windows lab environment with Sysmon and PowerShell script block logging enabled, the persistence detections in queries/persistence.md produced 3 true positive hits across 7 days of log data: one scheduled task created by a non-admin user outside business hours, one Run key added by a process with a LOLBin parent, and one new service installed with an unsigned binary. The credential-access detections produced 2 true positives and 4 false positives from legitimate admin tooling — the tuning notes in each query document exactly which allowlist conditions reduced that to 1 false positive per week.
+In a synthetic Windows lab environment with Sysmon and PowerShell script block logging enabled, the persistence detections in queries/persistence.md produced 3 true positive hits across 7 days of log data: one scheduled task created by a non-admin user outside business hours, one Run key added by a process with a LOLBin parent, and one new service installed with an unsigned binary. The credential-access detections produced 2 true positives and 4 false positives from legitimate admin tooling - the tuning notes in each query document exactly which allowlist conditions reduced that to 1 false positive per week.
 
 ```bash
 python scripts/validate_queries.py
