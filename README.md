@@ -132,6 +132,7 @@ In a synthetic Windows lab environment with Sysmon and PowerShell script block l
 
 ```bash
 python scripts/validate_queries.py
+python scripts/validate_sigma.py
 ```
 
 ## License And Safety
