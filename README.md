@@ -2,9 +2,9 @@
 
 ![Splunk Detection Content project banner](docs/assets/splunk-detection-content.svg)
 
-A detection and triage notebook for Splunk SPL searches organized by [MITRE ATT&CK](https://attack.mitre.org/) tactic. The content is written for Windows-centric lab environments with Active Directory, Sysmon, PowerShell logging, and standard Windows Security events.
+This is a Splunk detection and triage notebook organized by [MITRE ATT&CK](https://attack.mitre.org/) tactic. The content is written around Windows-centric lab environments with Active Directory, Sysmon, PowerShell logging, and standard Windows Security events.
 
-The point of this repository is not to dump searches or claim production coverage. Each detection is written as an analyst note: what behavior it looks for, what data it assumes, what tends to be noisy, and what I would check next before escalating.
+The point is not to dump searches or pretend they are production-ready out of the box. Each detection is written like an analyst note: what behavior it looks for, what data it assumes, what tends to be noisy, and what I would check next before escalating.
 
 The searches are based on lab practice, public technique research, and sanitized detection-writing exercises. They are meant to show security operations thinking: behavior, assumptions, tuning, triage context, and short playbook-style review paths.
 
