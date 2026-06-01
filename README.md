@@ -150,5 +150,5 @@ Before using any search operationally, tune index names, sourcetypes, field name
 
 ## Author
 
-David Sarkisyan · Cybersecurity Analyst · New York City · Built in Brooklyn
+David Sarkisyan · Cybersecurity Analyst · New York City
 [srkyn.com](https://srkyn.com) · [github.com/srkyn](https://github.com/srkyn) · Splunk Core User
